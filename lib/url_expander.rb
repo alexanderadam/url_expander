@@ -39,10 +39,12 @@ module UrlExpander
       @expander = (!expander_klass.nil?) ? expander_klass.new(url,options) : nil
       
       if @expander.nil? && !options[:is_redirection]
-        raise ArgumentError.new('Unknow url') 
-      end
-      
-      if options[:nested_shortening] & !@expander.nil?
+        if options[:strict]
+          raise ArgumentError.new('Unknown url') 
+        else
+          url
+        end
+      elsif options[:nested_shortening] & !@expander.nil?
         options[:limit] -= 1
         options[:is_redirection] = true
         UrlExpander::Client.expand(@expander.long_url, options)
