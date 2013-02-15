@@ -40,7 +40,7 @@ module UrlExpander
       
       if @expander.nil? && !options[:is_redirection]
         if options[:strict]
-          raise ArgumentError.new('Unknown url') 
+          raise ArgumentError.new('Unknown url')
         else
           url
         end
