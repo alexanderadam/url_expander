@@ -37,7 +37,7 @@ module UrlExpander
     
     
     # Using API
-    autoload :Bitly, 'api/bitly'
+    # autoload :Bitly, 'api/bitly'
     
     
     autoload :Budurl, 'api/budurl'
