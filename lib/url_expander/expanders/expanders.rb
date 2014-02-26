@@ -7,6 +7,7 @@ require 'url_expander/expanders/scrape'
 
 module UrlExpander
   module Expanders
+    autoload :Bitly, 'basic/bitly'
     autoload :Pocket, 'basic/pocket'
     autoload :Getpocket, 'basic/getpocket'
     autoload :Tinyurl, 'basic/tinyurl'
@@ -38,9 +39,6 @@ module UrlExpander
     
     
     # Using API
-    autoload :Bitly, 'api/bitly'
-    
-    
     autoload :Budurl, 'api/budurl'
     autoload :Cligs, 'api/cligs'
     autoload :Isgd, 'api/isgd'
