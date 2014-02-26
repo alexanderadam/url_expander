@@ -50,6 +50,7 @@ Gem::Specification.new do |s|
     "lib/url_expander/expanders/basic/nutshellurl.rb",
     "lib/url_expander/expanders/basic/owly.rb",
     "lib/url_expander/expanders/basic/plizy.rb",
+    "lib/url_expander/expanders/basic/pocket.rb",
     "lib/url_expander/expanders/basic/shrtst.rb",
     "lib/url_expander/expanders/basic/snipurl.rb",
     "lib/url_expander/expanders/basic/supr.rb",

@@ -7,6 +7,7 @@ require 'url_expander/expanders/scrape'
 
 module UrlExpander
   module Expanders
+    autoload :Pocket, 'basic/pocket'
     autoload :Tinyurl, 'basic/tinyurl'
     autoload :Twurlnl, 'basic/twurlnl'
     autoload :Shrtst, 'basic/shrtst'
