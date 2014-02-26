@@ -43,6 +43,7 @@ Gem::Specification.new do |s|
     "lib/url_expander/expanders/basic/doiop.rb",
     "lib/url_expander/expanders/basic/easyurljp.rb",
     "lib/url_expander/expanders/basic/fbme.rb",
+    "lib/url_expander/expanders/basic/getpocket.rb",
     "lib/url_expander/expanders/basic/itunes.rb",
     "lib/url_expander/expanders/basic/justas.rb",
     "lib/url_expander/expanders/basic/moourl.rb",
