@@ -7,6 +7,7 @@ require 'url_expander/expanders/scrape'
 
 module UrlExpander
   module Expanders
+    autoload :Tribal, 'basic/tribal'
     autoload :Bitly, 'basic/bitly'
     autoload :Pocket, 'basic/pocket'
     autoload :Getpocket, 'basic/getpocket'

@@ -61,6 +61,7 @@ Gem::Specification.new do |s|
     "lib/url_expander/expanders/basic/tinycc.rb",
     "lib/url_expander/expanders/basic/tinyurl.rb",
     "lib/url_expander/expanders/basic/tnwto.rb",
+    "lib/url_expander/expanders/basic/tribal.rb",
     "lib/url_expander/expanders/basic/twurlnl.rb",
     "lib/url_expander/expanders/basic/ur1ca.rb",
     "lib/url_expander/expanders/basic/urlie.rb",
