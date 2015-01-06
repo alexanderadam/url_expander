@@ -29,11 +29,12 @@ module UrlExpander
       private
       
       def fetch_url
-        data = JSON.parse Request.get("/forward.php?format=json&shorturl=http://is.gd/#{@shortner_key}").response.body
-        unless(data["errorcode"])
+        response = Request.get("/forward.php?format=json&shorturl=http://is.gd/#{@shortner_key}")
+        data = JSON.parse response.response.body
+        unless(data['errorcode'])
           @long_url = data["url"]
         else
-          raise UrlExpander::Error.new(data['errormessage'],data['errorcode'])
+          raise UrlExpander::PageNotFound.new(response)
         end
       end
     end

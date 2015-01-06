@@ -4,6 +4,7 @@ require 'httparty'
 $:.unshift(File.dirname(__FILE__))
 
 require 'url_expander/expanders/expanders'
+require 'url_expander/errors'
 
 module UrlExpander
   class Client
