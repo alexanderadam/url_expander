@@ -32,7 +32,9 @@ module UrlExpander
       attr_reader :parttern, :parent_klass
 
       def initialize(short_url = '', _options = {})
-        if short_url.match(parent_klass.class::PATTERN)
+        if parent_klass.nil?
+          @long_url = fetch_url short_url
+        elsif short_url.match(parent_klass.class::PATTERN)
           @long_url = parent_klass.fetch_url(Regexp.last_match(2))
         else
           raise 'invalid pattern'
@@ -41,18 +43,40 @@ module UrlExpander
 
       protected
 
-      # Common fetcher used my most expanders.
-      def fetch_url(path)
+      def http_client
+        return HTTParty if parent_klass.nil?
+
+        parent_klass.class::Request
+      end
+
+      def parse_body_url(path)
+        result = http_client.get path, follow_redirects: false
+        doc = Hpricot(result.response.body)
+        refresh_tag = (doc/"meta[@http-equiv='refresh']").first
+        return if refresh_tag.nil?
+
+        refresh_tag.attributes['content'].split(/url=/i).last
+      end
+
+      # Common fetcher used by most of my expanders.
+      def fetch_url(path, http_verb = :head)
         url = nil
-        result = parent_klass.class::Request.head(path, follow_redirects: false)
+        result = http_client.public_send http_verb, path, follow_redirects: false
 
         case result.response
+        when HTTParty::Response
+        when Net::HTTPOK
+          url = parse_body_url(path) || path
         when Net::HTTPMovedPermanently
           url = result['Location']
         when Net::HTTPFound
           url = result['location']
         when Net::HTTPNotFound
           raise UrlExpander::PageNotFound.new(result)
+        when Net::HTTPTemporaryRedirect
+          url = result['location']
+        when Net::HTTPMethodNotAllowed # move on with get instead post
+          url = fetch_url path, :get
         end
 
         raise UrlExpander::RedirectLocationNotReceived.new(result) if url.nil?

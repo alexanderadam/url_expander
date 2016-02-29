@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'httparty'
+require 'set'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
@@ -11,6 +12,12 @@ module UrlExpander
     # Expand a given url.
     def self.expand(url = '', options = {}, limit = options[:limit] || 10)
       options = options.dup
+      options[:visited_urls] ||= Set.new
+      if options[:visited_urls].include? url
+        return url
+      else
+        options[:visited_urls] << url
+      end
 
       # Setup the default options
       options[:nested_shortening] = true unless options.key?(:nested_shortening)
@@ -36,9 +43,15 @@ module UrlExpander
           expander_klass = exp
         end
       end
-      @expander = !expander_klass.nil? ? expander_klass.new(url, options) : nil
 
-      if @expander.nil? && !options[:is_redirection]
+      if expander_klass.nil?
+        @expander = UrlExpander::Expanders::Basic.new url, options
+      else
+        @expander = expander_klass.new url, options
+      end
+
+      if (@expander.nil? && !options[:is_redirection]) ||
+          (!@expander.nil? && @expander.long_url.nil?)
         if options[:strict]
           raise ArgumentError.new('Unknown url')
         else
