@@ -1,14 +1,10 @@
 module UrlExpander
   module Expanders
-    #
-    # Expand bit.ly URLS
-    # Usage:
-    # UrlExpander::Client.expand("http://bit.ly/1234qwer")
-    #
-    class Bitly < UrlExpander::Expanders::Basic
-      PATTERN = %r'(https?://bit\.ly(/[\w/]+))'
+    class GoogleNews < UrlExpander::Expanders::Basic
 
+      PATTERN = %r'(http://news.google.com/news/url\?(/.+))'
       attr_reader :parent_klass
+
       def initialize(short_url="", options={})
         @parent_klass = self
         super(short_url, options)
@@ -16,8 +12,9 @@ module UrlExpander
 
       class Request
         include HTTParty
-        base_uri 'http://bit.ly'
+        base_uri 'http://news.google.com'
       end
+
     end
   end
 end

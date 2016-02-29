@@ -26,9 +26,8 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/url_expander.rb",
     "lib/url_expander/expanders/api.rb",
-    "lib/url_expander/expanders/api/bitly.rb",
-    "lib/url_expander/expanders/api/bitly/.domains.rb.swp",
-    "lib/url_expander/expanders/api/bitly/domains.rb",
+    #"lib/url_expander/expanders/api/bitly/.domains.rb.swp",
+    #"lib/url_expander/expanders/api/bitly/domains.rb",
     "lib/url_expander/expanders/api/budurl.rb",
     "lib/url_expander/expanders/api/cligs.rb",
     "lib/url_expander/expanders/api/decenturl.rb",
@@ -38,11 +37,13 @@ Gem::Specification.new do |s|
     "lib/url_expander/expanders/api/xrlus.rb",
     "lib/url_expander/expanders/basic.rb",
     "lib/url_expander/expanders/basic/adjix.rb",
+    "lib/url_expander/expanders/basic/bitly.rb",
     "lib/url_expander/expanders/basic/digbig.rb",
     "lib/url_expander/expanders/basic/dlvrit.rb",
     "lib/url_expander/expanders/basic/doiop.rb",
     "lib/url_expander/expanders/basic/easyurljp.rb",
     "lib/url_expander/expanders/basic/fbme.rb",
+    "lib/url_expander/expanders/basic/getpocket.rb",
     "lib/url_expander/expanders/basic/itunes.rb",
     "lib/url_expander/expanders/basic/justas.rb",
     "lib/url_expander/expanders/basic/moourl.rb",
@@ -50,6 +51,7 @@ Gem::Specification.new do |s|
     "lib/url_expander/expanders/basic/nutshellurl.rb",
     "lib/url_expander/expanders/basic/owly.rb",
     "lib/url_expander/expanders/basic/plizy.rb",
+    "lib/url_expander/expanders/basic/pocket.rb",
     "lib/url_expander/expanders/basic/shrtst.rb",
     "lib/url_expander/expanders/basic/snipurl.rb",
     "lib/url_expander/expanders/basic/supr.rb",
@@ -59,6 +61,7 @@ Gem::Specification.new do |s|
     "lib/url_expander/expanders/basic/tinycc.rb",
     "lib/url_expander/expanders/basic/tinyurl.rb",
     "lib/url_expander/expanders/basic/tnwto.rb",
+    "lib/url_expander/expanders/basic/tribal.rb",
     "lib/url_expander/expanders/basic/twurlnl.rb",
     "lib/url_expander/expanders/basic/ur1ca.rb",
     "lib/url_expander/expanders/basic/urlie.rb",
@@ -86,7 +89,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<json>, [">= 0"])
       s.add_runtime_dependency(%q<hpricot>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<bundler>, [">= 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
     else
@@ -94,7 +97,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<json>, [">= 0"])
       s.add_dependency(%q<hpricot>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<bundler>, [">= 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_dependency(%q<rcov>, [">= 0"])
     end
@@ -103,7 +106,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<json>, [">= 0"])
     s.add_dependency(%q<hpricot>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<bundler>, [">= 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
     s.add_dependency(%q<rcov>, [">= 0"])
   end
