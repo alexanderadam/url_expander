@@ -1,11 +1,10 @@
 module UrlExpander
   module Expanders
     class VentureBeat < UrlExpander::Expanders::Basic
-
-      PATTERN = %r'(http://venturebeat\.wpengine\.com(/.+))'
+      PATTERN = %r{(http://venturebeat\.wpengine\.com(/.+))}
       attr_reader :parent_klass
 
-      def initialize(short_url="", options={})
+      def initialize(short_url = '', options = {})
         @parent_klass = self
         super(short_url, options)
       end
@@ -14,7 +13,6 @@ module UrlExpander
         include HTTParty
         base_uri 'http://venturebeat.wpengine.com'
       end
-
     end
   end
 end

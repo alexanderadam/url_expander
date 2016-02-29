@@ -9,9 +9,9 @@ module UrlExpander
       # Called from the Subclasses, its only job to set the @shortner_key
       # For example, if the short_url = 'http://bit.ly/k3irb0+'
       # then @shortner_key = 'k3irb0+'
-      def initialize(short_url="", options={})
+      def initialize(short_url = '', _options = {})
         if short_url.match(parent_klass.class::PATTERN)
-          @shortner_key = $2
+          @shortner_key = Regexp.last_match(2)
         else
           raise 'invalid pattern'
         end

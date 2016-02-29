@@ -6,10 +6,10 @@ module UrlExpander
     # UrlExpander::Client.expand("http://flip.it/1234qwer")
     #
     class Flipit < UrlExpander::Expanders::Basic
-      PATTERN = %r'(https?://flip\.it(/[\w/]+))'
+      PATTERN = %r{(https?://flip\.it(/[\w/]+))}
       attr_reader :parent_klass
 
-      def initialize(short_url="", options={})
+      def initialize(short_url = '', options = {})
         @parent_klass = self
         super(short_url, options)
       end

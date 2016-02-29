@@ -1,10 +1,10 @@
 module UrlExpander
   module Expanders
     class Vsbli < UrlExpander::Expanders::Basic
-      PATTERN = %r'(http://vsb\.li(/[\w/]+))'
+      PATTERN = %r{(http://vsb\.li(/[\w/]+))}
       attr_reader :parent_klass
 
-      def initialize(short_url="", options={})
+      def initialize(short_url = '', options = {})
         @parent_klass = self
         super(short_url, options)
       end

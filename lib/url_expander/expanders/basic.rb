@@ -1,6 +1,5 @@
 module UrlExpander
   module Expanders
-
     #
     # This is the basic class for all simple Net::HTTPMovedPermanently
     # Each subclass must define a url Pattern and a Reqest class for httpartty.
@@ -32,10 +31,9 @@ module UrlExpander
       attr_accessor :long_url
       attr_reader :parttern, :parent_klass
 
-
-      def initialize(short_url="", options={})
+      def initialize(short_url = '', _options = {})
         if short_url.match(parent_klass.class::PATTERN)
-          @long_url = parent_klass.fetch_url($2)
+          @long_url = parent_klass.fetch_url(Regexp.last_match(2))
         else
           raise 'invalid pattern'
         end
@@ -46,15 +44,15 @@ module UrlExpander
       # Common fetcher used my most expanders.
       def fetch_url(path)
         url = nil
-        result = parent_klass.class::Request.head(path, :follow_redirects => false)
+        result = parent_klass.class::Request.head(path, follow_redirects: false)
 
         case result.response
-          when Net::HTTPMovedPermanently
-            url = result['Location']
-          when Net::HTTPFound
-            url = result['location']
-          when Net::HTTPNotFound
-            raise UrlExpander::PageNotFound.new(result)
+        when Net::HTTPMovedPermanently
+          url = result['Location']
+        when Net::HTTPFound
+          url = result['location']
+        when Net::HTTPNotFound
+          raise UrlExpander::PageNotFound.new(result)
         end
 
         raise UrlExpander::RedirectLocationNotReceived.new(result) if url.nil?

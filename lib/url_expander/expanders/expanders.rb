@@ -1,9 +1,8 @@
-$:.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'url_expander/expanders/basic'
 require 'url_expander/expanders/api'
 require 'url_expander/expanders/scrape'
-
 
 module UrlExpander
   module Expanders
@@ -49,10 +48,8 @@ module UrlExpander
     autoload :Dlvrit, 'basic/dlvrit'
     autoload :Vsbli, 'basic/vsbli'
 
-
     # Using API
     # autoload :Bitly, 'api/bitly'
-
 
     autoload :Tribal, 'basic/tribal'
     autoload :Tumblr, 'basic/tumblr'
@@ -78,6 +75,5 @@ module UrlExpander
     autoload :Qsrli, 'scrape/qsrli'
     autoload :Shorl, 'scrape/shorl'
     autoload :Simurl, 'scrape/simurl'
-
   end
 end
