@@ -34,10 +34,11 @@ module UrlExpander
     autoload :Dlvrit, 'basic/dlvrit'
     autoload :Plizy, 'basic/plizy'
     autoload :Vsbli, 'basic/vsbli'
+    autoload :Bitly, 'basic/bitly'
     
     
     # Using API
-    autoload :Bitly, 'api/bitly'
+    # autoload :Bitly, 'api/bitly'
     
     
     autoload :Budurl, 'api/budurl'
