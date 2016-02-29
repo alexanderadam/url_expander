@@ -23,6 +23,8 @@ Require and Use
    UrlExpander::Client.expand("http://t.co/ZGEGdas")  => "http://www.blink182.com/upallnight/"
    UrlExpander::Client.expand("http://t.co/ZGEGdas", :nested_shortening => false)  => "http://bit.ly/oi029o"
 
+* :strict -- Raise exceptions when URL could not be expanded, is turned off by default (:strict => false)
+
 * :limit -- If the nested_shortening is turned on, then :limit controls the max number of redirection allowed. Default value is 10
    UrlExpander::Client.expand('http://tinyurl.com/66sekq5', :limit => 4)
 
