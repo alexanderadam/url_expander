@@ -81,7 +81,7 @@ module UrlExpander
         when Net::HTTPFound
           url = result['location']
         when Net::HTTPNotFound
-          raise UrlExpander::PageNotFound.new(result)
+          url = path
         when Net::HTTPTemporaryRedirect
           url = result['location']
         when Net::HTTPMethodNotAllowed # move on with get instead post
