@@ -34,7 +34,7 @@ module UrlExpander
     # end
     class Scrape
       attr_accessor :long_url
-      attr_reader   :parttern, :parent_klass
+      attr_reader :parent_klass
 
       def initialize(short_url = '', _options = {})
         if short_url.match(parent_klass::PATTERN)

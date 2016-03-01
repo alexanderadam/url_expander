@@ -29,9 +29,10 @@ module UrlExpander
     #
     class Basic
       attr_accessor :long_url
-      attr_reader :parttern, :parent_klass
+      attr_reader :parent_klass, :short_url
 
       def initialize(short_url = '', _options = {})
+        @short_url = short_url
         if parent_klass.nil?
           @long_url = fetch_url short_url
         elsif short_url.match(parent_klass.class::PATTERN)
@@ -55,7 +56,15 @@ module UrlExpander
         refresh_tag = (doc/"meta[@http-equiv='refresh']").first
         return if refresh_tag.nil?
 
-        refresh_tag.attributes['content'].split(/url=/i).last
+        redirect_path = refresh_tag.attributes['content'].split(/url=/i).last
+        redirect_uri = URI.parse(redirect_path)
+        current_uri = URI.parse path
+        if !current_uri.hostname.nil? && redirect_uri.hostname.nil?
+          redirect_uri.hostname = current_uri.hostname
+          redirect_uri.scheme = current_uri.scheme
+        end
+
+        redirect_uri.to_s
       end
 
       # Common fetcher used by most of my expanders.
