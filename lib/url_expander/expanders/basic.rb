@@ -76,14 +76,10 @@ module UrlExpander
         when HTTParty::Response
         when Net::HTTPOK
           url = parse_body_url(path) || path
-        when Net::HTTPMovedPermanently
+        when Net::HTTPMovedPermanently, Net::HTTPFound, Net::HTTPTemporaryRedirect
           url = result['Location']
-        when Net::HTTPFound
-          url = result['location']
-        when Net::HTTPNotFound
+        when Net::HTTPNotFound, Net::HTTPForbidden
           url = path
-        when Net::HTTPTemporaryRedirect
-          url = result['location']
         when Net::HTTPMethodNotAllowed # move on with get instead post
           url = fetch_url path, :get
         end
