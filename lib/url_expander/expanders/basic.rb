@@ -52,11 +52,18 @@ module UrlExpander
 
       def parse_body_url(path)
         result = http_client.get path, follow_redirects: false
+
         doc = Hpricot(result.response.body)
         refresh_tag = (doc/"meta[@http-equiv='refresh']").first
         return if refresh_tag.nil?
 
-        redirect_path = refresh_tag.attributes['content'].split(/url=/i).last
+        refresh_content = refresh_tag.attributes['content']
+        return if refresh_content =~ /\A\d*\z/
+
+        redirect_path = refresh_content.split(/url=/i)
+                                       .last
+                                       .sub(/\A['"]/, '')
+                                       .sub(/['"]\z/, '')
         redirect_uri = URI.parse(redirect_path)
         current_uri = URI.parse path
         if !current_uri.hostname.nil? && redirect_uri.hostname.nil?
@@ -76,9 +83,9 @@ module UrlExpander
         when HTTParty::Response
         when Net::HTTPOK
           url = parse_body_url(path) || path
-        when Net::HTTPMovedPermanently, Net::HTTPFound, Net::HTTPTemporaryRedirect
+        when Net::HTTPMovedPermanently, Net::HTTPFound, Net::HTTPTemporaryRedirect, Net::HTTPSeeOther
           url = result['Location']
-        when Net::HTTPNotFound, Net::HTTPForbidden
+        when Net::HTTPNotFound, Net::HTTPForbidden, Net::HTTPMethodNotAllowed
           url = path
         when Net::HTTPMethodNotAllowed # move on with get instead post
           url = fetch_url path, :get

@@ -66,7 +66,7 @@ module UrlExpander
     autoload :Budurl, 'api/budurl'
     autoload :Cligs, 'api/cligs'
     autoload :Isgd, 'api/isgd'
-    autoload :Googl, 'api/googl'
+    # autoload :Googl, 'api/googl'
     autoload :Decenturl, 'api/decenturl'
     autoload :Xrlus, 'api/xrlus'
     autoload :Dldbz, 'api/dldbz'
